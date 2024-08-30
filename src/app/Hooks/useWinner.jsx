@@ -8,11 +8,42 @@ export default function useWinner(selected, CPUselected){
     const [myScore, setMyScore] = useState(JSON.parse(localStorage.getItem('myscore')) || 0)
     const [CPUScore, setCPUScore] = useState(JSON.parse(localStorage.getItem('cpuscore')) || 0)
 
+        const [isMounted, setIsMounted] = useState(false);
+    
+        useEffect(() => {
+            // Marcar que el componente ha sido montado
+            setIsMounted(true);
+    
+            // Recuperar los valores de localStorage solo en el cliente
+            const storedMyScore = localStorage.getItem('myscore');
+            const storedCPUScore = localStorage.getItem('cpuscore');
+    
+            if (storedMyScore) {
+                setMyScore(JSON.parse(storedMyScore));
+            }
+    
+            if (storedCPUScore) {
+                setCPUScore(JSON.parse(storedCPUScore));
+            }
+        }, []);
+    
+        useEffect(() => {
+            // Solo ejecutar este efecto si el componente está montado
+            if (isMounted) {
+                localStorage.setItem('myscore', JSON.stringify(myScore));
+                localStorage.setItem('cpuscore', JSON.stringify(CPUScore));
+            }
+        }, [myScore, CPUScore, isMounted]);
+    
+   
+    
+    
+/*
     useEffect(() => {
         localStorage.setItem('myscore', JSON.stringify(myScore))
         localStorage.setItem('cpuscore', JSON.stringify(CPUScore))
     }, [myScore, CPUScore])
-
+*/
     function GetWinner(selected, CPUselected) {
         console.log(selected, CPUselected);
         setCPU(CPUselected)
@@ -72,4 +103,4 @@ export default function useWinner(selected, CPUselected){
         CPUScore,
         handleRestart
       }
-}
+    }
