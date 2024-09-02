@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 export default function useWinner(selected, CPUselected){
     const [winner, setWinner] = useState(null)
     const [CPU, setCPU] = useState()
-    
-    const [myScore, setMyScore] = useState(JSON.parse(localStorage.getItem('myscore')) || 0)
-    const [CPUScore, setCPUScore] = useState(JSON.parse(localStorage.getItem('cpuscore')) || 0)
+    const [myScore, setMyScore] = useState(0) 
+    const [CPUScore, setCPUScore] = useState(0)
+    /*
+    const [isMounted, setIsMounted] = useState(false);
 
-        const [isMounted, setIsMounted] = useState(false);
     
         useEffect(() => {
             // Marcar que el componente ha sido montado
@@ -35,6 +35,7 @@ export default function useWinner(selected, CPUselected){
             }
         }, [myScore, CPUScore, isMounted]);
     
+    */
    
     
     
